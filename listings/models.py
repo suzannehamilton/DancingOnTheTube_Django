@@ -10,6 +10,7 @@ class Organization(models.Model):
 
 class Event(models.Model):
     organization = models.ForeignKey(Organization)
+    start_time = models.TimeField()
 
     def __unicode__(self):
         return self.organization.name
