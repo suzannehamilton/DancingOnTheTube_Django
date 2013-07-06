@@ -1,6 +1,8 @@
 from django.http import HttpResponse
+from listings.models import Dance
 
 
 def index(request):
-
-    return HttpResponse("Hello, world. You're at the listings index.")
+    dances = Dance.objects.order_by('name')
+    output = ', '.join([dance.name for dance in dances])
+    return HttpResponse(output)
