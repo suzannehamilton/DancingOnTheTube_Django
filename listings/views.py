@@ -1,8 +1,12 @@
 from django.http import HttpResponse
+from django.template import loader, RequestContext
 from listings.models import Dance
 
 
 def index(request):
     dances = Dance.objects.order_by('name')
-    output = ', '.join([dance.name for dance in dances])
-    return HttpResponse(output)
+    template = loader.get_template('listings/index.html')
+    context = RequestContext(request, {
+        'dances': dances,
+    })
+    return HttpResponse(template.render(context))

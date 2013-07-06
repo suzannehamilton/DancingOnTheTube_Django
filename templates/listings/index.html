@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dancing on the Tube</title>
+</head>
+<body>
+    <h1>Dance styles</h1>
+    {% if dances %}
+        <ul>
+        {% for dance in dances %}
+            <li>{{ dance.name }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No dance styles are available.</p>
+    {% endif %}
+</body>
+</html>
