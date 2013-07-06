@@ -14,3 +14,10 @@ class Event(models.Model):
 
     def __unicode__(self):
         return self.organization.name
+
+
+class Dance(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.name
