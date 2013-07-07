@@ -1,5 +1,6 @@
 from django.db import models
-
+from schedule.models import Calendar
+from annoying.fields import AutoOneToOneField
 
 class Dance(models.Model):
     name = models.CharField(max_length=200)
@@ -11,6 +12,7 @@ class Dance(models.Model):
 class Organization(models.Model):
     name = models.CharField(max_length=200)
     dances = models.ManyToManyField(Dance)
+    calendar = AutoOneToOneField(Calendar, null=True)
 
     def __unicode__(self):
         return self.name

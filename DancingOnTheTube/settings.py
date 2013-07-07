@@ -121,7 +121,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'listings',
     'south',
-    'schedule'
+    'schedule',
+    'annoying'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

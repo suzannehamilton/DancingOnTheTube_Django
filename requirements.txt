@@ -2,3 +2,4 @@ Django==1.5
 south<2.0
 psycopg2==2.5.1
 django-schedule==0.6.1
+django-annoying==0.7.7
