@@ -6,11 +6,12 @@
 <body>
     <h1>Dance styles</h1>
     {% if dances %}
-        <ul>
         {% for dance in dances %}
-            <li>{{ dance.name }}</li>
+            <h2>{{ dance.name }}</h2>
+            {% for org in dance.organization_set.all %}
+                <h3>{{ org.name }}</h3>
+            {% endfor %}
         {% endfor %}
-        </ul>
     {% else %}
         <p>No dance styles are available.</p>
     {% endif %}
