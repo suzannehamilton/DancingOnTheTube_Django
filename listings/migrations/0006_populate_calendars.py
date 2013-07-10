@@ -9,7 +9,9 @@ class Migration(DataMigration):
     def forwards(self, orm):
         for org in orm.Organization.objects.all():
             calendar, is_created = orm['schedule.Calendar'].objects.get_or_create(name=org.name)
+            org.calendar = calendar
             calendar.save()
+            org.save()
 
     def backwards(self, orm):
         "No backwards method, because we cannot discriminate between manually-created calendars"

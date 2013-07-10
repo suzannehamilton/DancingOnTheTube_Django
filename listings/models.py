@@ -12,7 +12,7 @@ class Dance(models.Model):
 class Organization(models.Model):
     name = models.CharField(max_length=200)
     dances = models.ManyToManyField(Dance)
-    calendar = AutoOneToOneField(Calendar, null=True)
+    calendar = AutoOneToOneField(Calendar)
 
     def __unicode__(self):
         return self.name
