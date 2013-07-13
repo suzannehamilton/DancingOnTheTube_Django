@@ -1,5 +1,7 @@
 # Django settings for DancingOnTheTube project.
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -117,15 +119,15 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'schedule',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'listings',
     'south',
-    'schedule',
     'annoying'
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
+TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth'
 )
