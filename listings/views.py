@@ -7,3 +7,6 @@ def index(request):
 
     context = {'dances': dances}
     return render(request, 'listings/index.html', context)
+
+def map(request):
+    return render(request, 'listings/map.html')
