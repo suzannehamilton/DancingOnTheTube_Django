@@ -16,14 +16,24 @@ class Organization(models.Model):
         return self.name
 
 
+class Event(models.Model):
+    organization = models.ForeignKey(Organization)
+    start_time = models.TimeField()
+
+    def __unicode__(self):
+        return self.organization.name
+
+
 class Repeat(models.Model):
+    repeat = models.OneToOneField(Event, primary_key=True)
+
     REPEAT = (
         ('NONE', 'None'),
         ('MONTH', 'Monthly'),
         ('WEEKLY', 'Weekly')
     )
 
-    frequency = models.CharField(max_length=1, choices=REPEAT)
+    frequency = models.CharField(max_length=10, choices=REPEAT)
     nth_day = models.IntegerField()
     n_weeks = models.IntegerField()
 
@@ -34,12 +44,3 @@ class Repeat(models.Model):
     friday = models.BooleanField()
     saturday = models.BooleanField()
     sunday = models.BooleanField()
-
-
-class Event(models.Model):
-    organization = models.ForeignKey(Organization)
-    start_time = models.TimeField()
-    repeat = models.OneToOneField(Repeat, primary_key=True)
-
-    def __unicode__(self):
-        return self.organization.name
