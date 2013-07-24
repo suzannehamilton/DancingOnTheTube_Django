@@ -120,13 +120,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'listings',
-    'south',
-    'schedule'
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
-    'django.contrib.auth.context_processors.auth'
+    'south'
 )
 
 # A sample logging configuration. The only tangible logging
