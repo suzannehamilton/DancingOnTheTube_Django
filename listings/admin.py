@@ -9,6 +9,6 @@ class EventInline(admin.StackedInline):
 class OrganizationAdmin(admin.ModelAdmin):
     inlines = [EventInline]
 
-
 admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(Dance)
+admin.site.register(Event)

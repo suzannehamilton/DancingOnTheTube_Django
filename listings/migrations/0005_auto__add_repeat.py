@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding model 'Repeat'
         db.create_table(u'listings_repeat', (
-            ('event', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['listings.Event'], primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('frequency', self.gf('django.db.models.fields.CharField')(max_length=1)),
             ('nth_day', self.gf('django.db.models.fields.IntegerField')()),
             ('n_weeks', self.gf('django.db.models.fields.IntegerField')()),
@@ -24,10 +24,26 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'listings', ['Repeat'])
 
+        # Deleting field 'Event.id'
+        db.delete_column(u'listings_event', u'id')
+
+        # Adding field 'Event.repeat'
+        db.add_column(u'listings_event', 'repeat',
+                      self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['listings.Repeat'], unique=True, primary_key=True),
+                      keep_default=False)
+
 
     def backwards(self, orm):
         # Deleting model 'Repeat'
         db.delete_table(u'listings_repeat')
+
+        # Adding field 'Event.id'
+        db.add_column(u'listings_event', u'id',
+                      self.gf('django.db.models.fields.AutoField')(default=0, primary_key=True),
+                      keep_default=False)
+
+        # Deleting field 'Event.repeat'
+        db.delete_column(u'listings_event', 'repeat_id')
 
 
     models = {
@@ -38,8 +54,8 @@ class Migration(SchemaMigration):
         },
         u'listings.event': {
             'Meta': {'object_name': 'Event'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'organization': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['listings.Organization']"}),
+            'repeat': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['listings.Repeat']", 'unique': 'True', 'primary_key': 'True'}),
             'start_time': ('django.db.models.fields.TimeField', [], {})
         },
         u'listings.organization': {
@@ -50,9 +66,9 @@ class Migration(SchemaMigration):
         },
         u'listings.repeat': {
             'Meta': {'object_name': 'Repeat'},
-            'event': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['listings.Event']", 'primary_key': 'True'}),
             'frequency': ('django.db.models.fields.CharField', [], {'max_length': '1'}),
             'friday': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'monday': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'n_weeks': ('django.db.models.fields.IntegerField', [], {}),
             'nth_day': ('django.db.models.fields.IntegerField', [], {}),
