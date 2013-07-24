@@ -11,9 +11,9 @@ class Migration(SchemaMigration):
         # Adding model 'Repeat'
         db.create_table(u'listings_repeat', (
             ('repeat', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['listings.Event'], unique=True, primary_key=True)),
-            ('frequency', self.gf('django.db.models.fields.CharField')(max_length=10)),
-            ('nth_day', self.gf('django.db.models.fields.IntegerField')()),
-            ('n_weeks', self.gf('django.db.models.fields.IntegerField')()),
+            ('frequency', self.gf('django.db.models.fields.CharField')(default='NONE', max_length=10)),
+            ('nth_day', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
+            ('n_weeks', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
             ('monday', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('tuesday', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('wednesday', self.gf('django.db.models.fields.BooleanField')(default=False)),
@@ -50,11 +50,11 @@ class Migration(SchemaMigration):
         },
         u'listings.repeat': {
             'Meta': {'object_name': 'Repeat'},
-            'frequency': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
+            'frequency': ('django.db.models.fields.CharField', [], {'default': "'NONE'", 'max_length': '10'}),
             'friday': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'monday': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'n_weeks': ('django.db.models.fields.IntegerField', [], {}),
-            'nth_day': ('django.db.models.fields.IntegerField', [], {}),
+            'n_weeks': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'nth_day': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'repeat': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['listings.Event']", 'unique': 'True', 'primary_key': 'True'}),
             'saturday': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'sunday': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),

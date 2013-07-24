@@ -27,15 +27,19 @@ class Event(models.Model):
 class Repeat(models.Model):
     repeat = models.OneToOneField(Event, primary_key=True)
 
+    NONE = 'NONE'
+    MONTHLY = 'MONTHLY'
+    WEEKLY = 'WEEKLY'
+
     REPEAT = (
-        ('NONE', 'None'),
-        ('MONTH', 'Monthly'),
-        ('WEEKLY', 'Weekly')
+        (NONE, 'None'),
+        (MONTHLY, 'Monthly'),
+        (WEEKLY, 'Weekly')
     )
 
-    frequency = models.CharField(max_length=10, choices=REPEAT)
-    nth_day = models.IntegerField()
-    n_weeks = models.IntegerField()
+    frequency = models.CharField(max_length=10, choices=REPEAT, default=NONE)
+    nth_day = models.IntegerField(null=True, blank=True)
+    n_weeks = models.IntegerField(null=True, blank=True)
 
     monday = models.BooleanField()
     tuesday = models.BooleanField()
