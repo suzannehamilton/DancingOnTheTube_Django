@@ -25,7 +25,7 @@ class Event(models.Model):
 
 
 class Repeat(models.Model):
-    repeat = models.OneToOneField(Event, primary_key=True)
+    event = models.OneToOneField(Event, primary_key=True)
 
     NONE = 'NONE'
     MONTHLY = 'MONTHLY'
